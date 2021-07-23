@@ -1,9 +1,7 @@
 
-# Examples of algortihms
+# Examples of algorithms
 
 | Algorithm | Source | 
 | --------- | ------ |
-| Binary search | `bsearch.c` |
+| Binary search | [`bsearch.c`](bsearch.c) |
 
-
-License MIT
