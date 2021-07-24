@@ -89,8 +89,10 @@ void quicksort( int * arr, size_t ln, size_t low, size_t high ) {
     if( low < high ) {
         printf( "  [quicksort( %p, ln:%lu, l:%lu, h:%lu )]\n", arr, ln, low, high );
         size_t p = partition( arr, ln, low, high );
-        quicksort( arr, ln, low, ( p > 0 ? (p - 1) : p ) ); //note: avoids underflow on 'high'
-        quicksort( arr, ln, (p + 1), high );
+        if( p > 0 )
+            quicksort( arr, ln, low, (p - 1) ); //note: avoids underflow on 'high'
+        if( p < high )
+            quicksort( arr, ln, (p + 1), high );
     }
 }
 
@@ -191,6 +193,14 @@ bool test_down_up() {
     printResult( "down/up", arr, expected, 11 );
 }
 
+bool test_repeats() {
+    int       arr[]      = { 9, 10, 0, 10, 1, 8, 2, 11, 4, 7, 6, 5, 11, 11, 1, 3  };
+    const int expected[] = { 0, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 11, 11, 11 };
+
+    sort( arr, 16 );    
+    printResult( "down/up", arr, expected, 16 );
+}
+
 int main() {
     test_one_el();
     test_two_el();
@@ -199,6 +209,7 @@ int main() {
     test_inverse();
     test_half_and_half();
     test_down_up();
+    test_repeats();
         
     printf( "%lu/%lu successful tests\n", test_success, test_count );
     return 0;
