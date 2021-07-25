@@ -18,8 +18,7 @@
  * @return Found state
  */
 bool binarySearch_( const int * arr, size_t low, size_t high, int target ) {        
-    double half = ( (double) high - low ) / 2;
-    size_t mid  = low + (size_t) ceil( half );
+    size_t mid = ( low + ceil( ( high - low ) / 2. ) );
     
     printf( "  [binarySearch( arr, l:%lu, h:%lu, %d )] mid=%d\n", low, high, target, mid );
     
